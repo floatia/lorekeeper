@@ -192,6 +192,7 @@ class CharacterManager extends Service
             ]);
 
             $characterData['name'] = ($isMyo && isset($data['name'])) ? $data['name'] : null;
+            $characterData['pronouns'] = ($isMyo && isset($data['pronouns'])) ? $data['pronouns'] : null;
             $characterData['owner_url'] = isset($characterData['user_id']) ? null : $data['owner_url'];
             $characterData['is_sellable'] = isset($data['is_sellable']);
             $characterData['is_tradeable'] = isset($data['is_tradeable']);
@@ -1277,6 +1278,9 @@ class CharacterManager extends Service
 
             // Update the character's profile
             if(!$character->is_myo_slot) $character->name = $data['name'];
+            $character->save();
+
+            if(!$character->is_myo_slot) $character->pronouns = $data['pronouns'];
             $character->save();
 
             if(!$character->is_myo_slot && Config::get('lorekeeper.extensions.character_TH_profile_link')) $character->profile->link = $data['link'];

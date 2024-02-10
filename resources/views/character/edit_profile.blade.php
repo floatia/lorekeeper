@@ -25,6 +25,10 @@
         {!! Form::label('name', 'Name') !!}
         {!! Form::text('name', $character->name, ['class' => 'form-control']) !!}
     </div>
+    <div class="form-group">
+        {!! Form::label('pronouns', 'Pronouns') !!} {!! add_help('Your characters pronouns will be displayed on their profile. This field can be changed or removed at anytime. This field is only for pronouns, adding anything else here is grounds for a warning or ban.') !!}
+        {!! Form::text('pronouns', $character->pronouns, ['class' => 'form-control']) !!}
+    </div>
     @if(Config::get('lorekeeper.extensions.character_TH_profile_link'))
         <div class="form-group">
             {!! Form::label('link', 'Profile Link') !!}
