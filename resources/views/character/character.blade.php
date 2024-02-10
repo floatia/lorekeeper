@@ -17,6 +17,9 @@
 <div class="row mb-3">
     <div class="col-md-7">
         <div class="text-center">
+        @if($character->pronouns)
+            <div class="text-center card"><h2 class="text-secondary">{{ $character->pronouns }}</h2></div>
+        @endif
             <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists( public_path($character->image->imageDirectory.'/'.$character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}" data-lightbox="entry" data-title="{{ $character->fullName }}">
                 <img src="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists( public_path($character->image->imageDirectory.'/'.$character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}" class="image" alt="{{ $character->fullName }}" />
             </a>
