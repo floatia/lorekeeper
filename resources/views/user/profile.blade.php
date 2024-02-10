@@ -115,6 +115,8 @@
 <hr>
 <br><br>
 
+<div class="pagedoll fixed-bottom pb-2" style="right: 75; left: inherit;"><img style="max-width: auto; max-height: 200px" src="/images/pagedolls/{{ $user->pagedoll }}" /></div>
+
 @comments(['model' => $user->profile,
         'perPage' => 5
     ])

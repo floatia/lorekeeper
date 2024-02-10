@@ -35,7 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'alias', 'rank_id', 'email', 'password', 'is_news_unread', 'is_banned', 'has_alias', 'avatar', 'is_sales_unread', 'birthday'
+        'name', 'alias', 'rank_id', 'email', 'password', 'is_news_unread', 'is_banned', 'has_alias', 'avatar', 'pagedoll', 'is_sales_unread', 'birthday'
     ];
 
     /**
@@ -331,6 +331,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvatar()
     {
         return ($this->avatar);
+    }
+
+    /**
+     * Displays the user's pagedoll
+     *
+     * @return string
+     */
+    public function getPagedoll()
+    {
+        return ($this->pagedoll);
     }
 
     /**

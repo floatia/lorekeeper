@@ -11,13 +11,36 @@
 <div class="card p-3 mb-2">
     <h3>Avatar</h3>
     <div class="text-left"><div class="alert alert-warning">Please note a hard refresh may be required to see your updated avatar. Also please note that uploading a .gif will display a 500 error after; the upload should still work, however.</div></div>
+    <div class="text-left"><div class="alert alert-warning">Leaving this upload blank and clicking Submit will reset your avatar to the default image.</div></div>
     @if(Auth::user()->isStaff)
         <div class="alert alert-danger">For admins - note that .GIF avatars leave a tmp file in the directory (e.g php2471.tmp). There is an automatic schedule to delete these files.
         </div>
     @endif
     <form enctype="multipart/form-data" action="avatar" method="POST">
         <label>Update Profile Image</label><br>
-        <input type="file" name="avatar">
+        <span class="btn btn-sm btn-file image-picker">
+            Browse <input type="file" name="avatar">
+        </span>
+        <!-- <input type="file" name="avatar"> -->
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="submit" class="pull-right btn btn-sm btn-primary">
+    </form>
+</div>
+
+<div class="card p-3 mb-2">
+    <h3>Pagedoll</h3>
+    <div class="text-left"><div class="alert alert-warning">Please note a hard refresh may be required to see your updated pagedoll. Also please note that uploading a .gif will display a 500 error after; the upload should still work, however.</div></div>
+    <div class="text-left"><div class="alert alert-warning">Leaving this upload blank and clicking Submit will reset your pagedoll to the default image.</div></div>
+    @if(Auth::user()->isStaff)
+        <div class="alert alert-danger">For admins - note that .GIF pagedolls leave a tmp file in the directory (e.g php2471.tmp). There is an automatic schedule to delete these files.
+        </div>
+    @endif
+    <form enctype="multipart/form-data" action="pagedoll" method="POST">
+        <label>Update Pagedoll </label><br>
+        <span class="btn btn-sm btn-file image-picker">
+            Browse <input type="file" name="pagedoll">
+        </span>
+        <!-- <input type="file" name="pagedoll"> -->
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="submit" class="pull-right btn btn-sm btn-primary">
     </form>

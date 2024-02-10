@@ -147,7 +147,7 @@ class UserService extends Service
         return true;
     }
 
-    /**
+/**
      * Updates the user's avatar. 
      *
      * @param  array                  $data
@@ -159,9 +159,21 @@ class UserService extends Service
         DB::beginTransaction();
 
         try {
-            if(!$avatar) throw new \Exception ("Please upload a file.");
+            //If no avatar is selected to upload
+            if(!$avatar)
+            {               
+                //Set user avatar to default
+                $user->avatar = 'default.jpg';
+                //Set the avatar variable in the function to the default image file
+                $avatar = file('images/avatars/default.jpg');
+                //Delete all files with the user's ID
+                array_map('unlink', glob("images/avatars/" . $user->id . ".*"));
+            }
+            else
+            {    
+            //throw new \Exception ("Please upload a file.");
             $filename = $user->id . '.' . $avatar->getClientOriginalExtension();
-            
+
             if ($user->avatar !== 'default.jpg') {
                 $file = 'images/avatars/' . $user->avatar;
                 //$destinationPath = 'uploads/' . $id . '/';
@@ -173,23 +185,91 @@ class UserService extends Service
 
             // Checks if uploaded file is a GIF
             if ($avatar->getClientOriginalExtension() == 'gif') {
+                $user->avatar = $filename;
+                $user->save();
+                $file = 'images/avatars/' . $user->avatar;
             
                 if(!copy($avatar, $file)) throw new \Exception("Failed to copy file.");
-                if(!$file->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file."); 
-                if(!$avatar->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file."); 
-                
+                return $this->commitReturn($avatar);
+                //if(!$file->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file."); 
+                //if(!$avatar->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file."); 
             }
 
             else {
-                if(!Image::make($avatar)->resize(150, 150)->save( public_path('images/avatars/' . $filename))) 
+                if(!Image::make($avatar)->resize(150, 150)->save( public_path('images/avatars/' . $filename)))
                 throw new \Exception("Failed to process avatar.");
             }
 
             $user->avatar = $filename;
+        }
             $user->save();
 
             return $this->commitReturn($avatar);
-        } catch(\Exception $e) { 
+        } catch(\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+        return $this->rollbackReturn(false);
+    }
+
+     /**
+     * Updates the user's pagedoll. 
+     *
+     * @param  array                  $data
+     * @param  \App\Models\User\User  $user
+     * @return bool
+     */
+    public function updatePagedoll($pagedoll, $user)
+    {
+        DB::beginTransaction();
+
+        try {
+            //If no pagedoll is selected to upload
+            if(!$pagedoll)
+            {               
+                //Set user pagedoll to default
+                $user->pagedoll = 'default.png';
+                //Set the pagedoll variable in the function to the default image file
+                $pagedoll = file('images/pagedolls/default.png');
+                //Delete all files with the user's ID
+                array_map('unlink', glob("images/pagedolls/" . $user->id . ".*"));
+            }
+            else
+            {    
+            //throw new \Exception ("Please upload a file.");
+            $filename = $user->id . '.' . $pagedoll->getClientOriginalExtension();
+
+            if ($user->pagedoll !== 'default.png') {
+                $file = 'images/pagedolls/' . $user->pagedoll;
+                //$destinationPath = 'uploads/' . $id . '/';
+
+                if (File::exists($file)) {
+                    if(!unlink($file)) throw new \Exception("Failed to unlink old pagedoll.");
+                }
+            }
+
+            // Checks if uploaded file is a GIF
+            if ($pagedoll->getClientOriginalExtension() == 'gif') {
+                $user->pagedoll = $filename;
+                $user->save();
+                $file = 'images/pagedolls/' . $user->pagedoll;
+            
+                if(!copy($pagedoll, $file)) throw new \Exception("Failed to copy file.");
+                return $this->commitReturn($pagedoll);
+                //if(!$file->move( public_path('images/pagedolls', $filename))) throw new \Exception("Failed to move file."); 
+                //if(!$pagedoll->move( public_path('images/pagedolls', $filename))) throw new \Exception("Failed to move file."); 
+            }
+
+            else {
+                if(!Image::make($pagedoll)->save( public_path('images/pagedolls/' . $filename)))
+                throw new \Exception("Failed to process pagedolls.");
+            }
+
+            $user->pagedoll = $filename;
+        }
+            $user->save();
+
+            return $this->commitReturn($pagedoll);
+        } catch(\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
         return $this->rollbackReturn(false);

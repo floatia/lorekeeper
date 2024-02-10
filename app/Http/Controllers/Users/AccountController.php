@@ -84,6 +84,23 @@ class AccountController extends Controller
         }
         return redirect()->back();
     }
+
+    /**
+     * Edits the user's pagedoll.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postPagedoll(Request $request, UserService $service)
+    {
+        if($service->updatePagedoll($request->file('pagedoll'), Auth::user())) {
+            flash('Pagedoll updated successfully.')->success();
+        }
+        else {
+            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+        }
+        return redirect()->back();
+    }
     
     /**
      * Changes the user's password.
