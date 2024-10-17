@@ -35,5 +35,11 @@ return [
         'name' => 'Cure',
         'text_color' => '#ffffff',
         'background_color' => '#b4676b'
+        ],
+        
+    'encounterpotion' => [
+        'name' => 'Encounter Potion',
+        'text_color' => '#ffffff',
+        'background_color' => '#1fd1a7'
     ],
 ];
