@@ -179,6 +179,15 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
     Route::post('traits/edit/{id?}', 'FeatureController@postCreateEditFeature');
     Route::post('traits/delete/{id}', 'FeatureController@postDeleteFeature');
 
+    # STATUS EFFECTS
+    Route::get('status-effects', 'StatusController@getIndex');
+    Route::get('status-effects/create', 'StatusController@getCreateStatusEffect');
+    Route::get('status-effects/edit/{id}', 'StatusController@getEditStatusEffect');
+    Route::get('status-effects/delete/{id}', 'StatusController@getDeleteStatusEffect');
+    Route::post('status-effects/create', 'StatusController@postCreateEditStatusEffect');
+    Route::post('status-effects/edit/{id?}', 'StatusController@postCreateEditStatusEffect');
+    Route::post('status-effects/delete/{id}', 'StatusController@postDeleteStatusEffect');
+
     # CHARACTER CATEGORIES
     Route::get('character-categories', 'CharacterCategoryController@getIndex');
     Route::get('character-categories/create', 'CharacterCategoryController@getCreateCharacterCategory');
@@ -311,6 +320,7 @@ Route::group(['prefix' => 'masterlist', 'namespace' => 'Characters', 'middleware
 Route::group(['prefix' => 'character', 'namespace' => 'Characters', 'middleware' => 'power:edit_inventories'], function() {
     Route::post('{slug}/grant', 'GrantController@postCharacterCurrency');
     Route::post('{slug}/grant-items', 'GrantController@postCharacterItems');
+    Route::post('{slug}/grant-status', 'GrantController@postCharacterStatusEffect');
 });
 Route::group(['prefix' => 'character', 'namespace' => 'Characters', 'middleware' => 'power:manage_characters'], function() {
 
