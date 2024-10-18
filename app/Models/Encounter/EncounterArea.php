@@ -5,6 +5,7 @@ namespace App\Models\Encounter;
 use App\Models\Character\CharacterCurrency;
 use App\Models\Character\CharacterItem;
 use App\Models\Currency\Currency;
+use App\Models\Status\StatusEffect;
 use App\Models\Encounter\Encounter;
 use App\Models\Encounter\EncounterArea;
 use App\Models\Model;

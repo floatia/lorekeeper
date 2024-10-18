@@ -67,6 +67,7 @@
     'loots' => $prompt->rewards,
     'showLootTables' => true,
     'showRaffles' => true,
+    'statuses' => $statuses,
 ])
 <hr>
 <h3>Restrict action</h3>
@@ -123,6 +124,7 @@
     'currencies' => $currencies,
     'tables' => $tables,
     'raffles' => $raffles,
+    'statuses' => $statuses,
     'showLootTables' => true,
     'showRaffles' => true,
 ])
@@ -152,7 +154,7 @@
     ]) !!}
 </div>
 
-@include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true])
+@include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true, 'statuses' => $statuses])
 
 <script>
     $(document).ready(function() {
@@ -162,6 +164,7 @@
         var $limitRow = $('#limitRow').find('.limit-row');
         var $itemSelect = $('#limitRowData').find('.item-select');
         var $currencySelect = $('#limitRowData').find('.currency-select');
+        var $statusSelect = $('#limitRowData').find('.status-select');
 
 
         $('#limitTableBody .selectize').selectize();
@@ -183,7 +186,7 @@
             var $clone = null;
             if (val == 'Item') $clone = $itemSelect.clone();
             else if (val == 'Currency') $clone = $currencySelect.clone();
-
+            else if (val == 'Status') $clone = statusSelect.clone();
 
             $cell.html('');
             $cell.append($clone);
@@ -196,6 +199,7 @@
 
                 var $clone = null;
                 if (val == 'Item') $clone = $itemSelect.clone();
+                else if (val == 'Status') $clone = statusSelect.clone();
                 else if (val == 'Currency') $clone = $currencySelect.clone();
 
                 $cell.html('');

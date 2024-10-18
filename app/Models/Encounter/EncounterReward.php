@@ -70,6 +70,9 @@ class EncounterReward extends Model
             case 'Raffle':
                 return $this->belongsTo('App\Models\Raffle\Raffle', 'rewardable_id');
                 break;
+            case 'Status':
+                return $this->belongsTo('App\Models\Status\StatusEffect', 'rewardable_id');
+                break;
         }
         return null;
     }

@@ -18,6 +18,8 @@ use App\Models\Encounter\EncounterPrompt;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Status\StatusEffect;
+
 /**use App\Models\Pet\Pet;
 use App\Models\Award\Award;
 use App\Models\Claymore\Gear;
@@ -87,6 +89,7 @@ class EncounterController extends Controller
             'encounters' => Encounter::orderBy('name')->pluck('name', 'id'),
             'items' => Item::orderBy('name')->pluck('name', 'id'),
             'currencies' => Currency::orderBy('name')->pluck('name', 'id'),
+            'statuses' => StatusEffect::orderBy('name')->pluck('name', 'id'),
             /**'pets' => Pet::orderBy('name')->pluck('name', 'id'),
             'awards' => Award::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
             'gears' => Gear::orderBy('name')->pluck('name', 'id'),
@@ -246,6 +249,7 @@ class EncounterController extends Controller
             'items' => Item::orderBy('name')->pluck('name', 'id'),
             'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
             'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
+            'statuses' => StatusEffect::orderBy('name')->pluck('name', 'id'),
             'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
         ]);
     }
@@ -265,6 +269,7 @@ class EncounterController extends Controller
             'items' => Item::orderBy('name')->pluck('name', 'id'),
             'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
             'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
+            'statuses' => StatusEffect::orderBy('name')->pluck('name', 'id'),
             'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
         ]);
     }
@@ -347,6 +352,7 @@ class EncounterController extends Controller
             'items' => Item::orderBy('name')->pluck('name', 'id'),
             'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
             'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
+            'statuses' => StatusEffect::orderBy('name')->pluck('name', 'id'),
             'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
         ]);
     }

@@ -548,6 +548,9 @@ class EncounterService extends Service
                     case 'Raffle':
                         $type = 'App\Models\Raffle\Raffle';
                         break;
+                    case 'Status':
+                        $type = 'App\Models\Status\StatusEffect';
+                        break;
                 }
                 $asset = $type::find($data['rewardable_id'][$key]);
                 addAsset($assets, $asset, $data['quantity'][$key]);
@@ -648,9 +651,10 @@ class EncounterService extends Service
                     'data' => 'Received rewards from ' . $encounter->name . ' encounter',
                 ];
 
-                if (!($rewards = fillUserAssets($action->rewardItems, null, $user, $logType, $rewardData))) {
+                if (!($rewards = fillCharacterAssets($action->rewardItems, null, $user, $logType, $rewardData))) {
                     throw new \Exception('Failed to distribute rewards to user.');
                 }
+
                 flash($this->getRewardsString($rewards));
             }
 
