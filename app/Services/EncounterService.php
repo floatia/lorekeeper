@@ -697,6 +697,9 @@ class EncounterService extends Service
         DB::beginTransaction();
 
         try {
+
+            if($user->settings->character_changes < 1) throw new \Exception('You have no character changes remaining today.');
+
             if (!$id) {
                 throw new \Exception('Please select a character.');
             }
@@ -708,6 +711,8 @@ class EncounterService extends Service
                 throw new \Exception('You do not own this character.');
             }
 
+            $user->settings->character_changes -= 1;
+            $user->settings->save();
             $user->settings->encounter_character_id = $id;
             $user->settings->save();
 

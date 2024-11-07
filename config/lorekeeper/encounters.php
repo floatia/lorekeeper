@@ -26,4 +26,7 @@ return [
     //either that or remove the kernel command
     'refresh_energy' => 1,
 
+    //how many times a user can change their character a day
+    'character_changes' => 5,
+
 ];

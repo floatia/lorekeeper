@@ -105,6 +105,8 @@ class AddSiteSettings extends Command
 
         $this->addSiteSetting('encounter_energy', 5, 'Amount of energy for encounters a user should get each day. Resets daily.');
 
+        $this->addSiteSetting('character_changes', 5, 'Amount of timesa user can change their encounter character each day. Resets daily.');
+
         $this->line("\nSite settings up to date!");
 
     }

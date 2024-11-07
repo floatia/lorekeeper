@@ -28,6 +28,8 @@
                     {!! Form::submit('Select Character', ['class' => 'btn btn-primary mb-2']) !!}
                     {!! Form::close() !!}
                 </div>
+
+                <div class="justify-content-center text-center">You can change your character <strong class="energy-amount">{{ $character_changes }}</strong> more times today.</div>
             @else
                 <div class="justify-content-center text-center">You have <strong class="energy-amount">{{ $energy }}</strong> energy.</div>
             @endif

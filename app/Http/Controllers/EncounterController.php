@@ -63,12 +63,19 @@ class EncounterController extends Controller
             }
         }
 
+        //get character change val
+        if ($use_characters) {
+            $user->settings->character_changes ?? null;
+            $character_changes = $user->settings->character_changes;
+        }
+
         return view('encounters.index', [
             'user' => $user,
             'areas' => EncounterArea::orderBy('name', 'DESC')->active()->get(),
             'characters' => $user->characters()->pluck('slug', 'id'),
             'use_energy' => $use_energy,
             'use_characters' => $use_characters,
+            'character_changes' => $user->settings->character_changes,
             'energy' => $energy ?? null,
             'character' => $character ?? null,
         ]);
@@ -209,6 +216,9 @@ class EncounterController extends Controller
     public function postSelectCharacter(Request $request, EncounterService $service)
     {
         $id = $request->input('character_id');
+        $user = Auth::user();
+        $character = $user->settings->encounterCharacter;
+
         if ($service->selectCharacter(Auth::user(), $id)) {
             flash('Character selected successfully.')->success();
         } else {

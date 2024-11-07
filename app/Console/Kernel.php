@@ -32,6 +32,8 @@ class Kernel extends ConsoleKernel
                 ->everyMinute();
         $schedule->command('refresh-encounter-energy')
                 ->daily();
+        $schedule->command('reset-character-changes')
+                ->daily();
         $schedule->command('update-timed-areas')
                 ->everyMinute();
 
