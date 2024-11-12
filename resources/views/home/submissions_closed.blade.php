@@ -44,7 +44,7 @@
     @else 
         <p>Note that any rewards added here are <u>in addition</u> to the default prompt rewards. If you do not require any additional rewards, you can leave this blank.</p>
     @endif
-    @include('widgets._loot_select', ['loots' => null, 'showLootTables' => false])
+    @include('widgets._loot_select', ['loots' => null, 'showLootTables' => false, 'showStatuses' => false])
     @if(!$isClaim)
         <div id="rewards" class="mb-3"></div>
     @endif
@@ -65,7 +65,7 @@
 {!! Form::close() !!}
 
 @include('widgets._character_select', ['characterCurrencies' => $characterCurrencies])
-@include('widgets._loot_select_row', ['items' => $items, 'currencies' => $currencies, 'showLootTables' => false])
+@include('widgets._loot_select_row', ['items' => $items, 'currencies' => $currencies, 'showLootTables' => false, 'showStatuses' => false])
 
 
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">

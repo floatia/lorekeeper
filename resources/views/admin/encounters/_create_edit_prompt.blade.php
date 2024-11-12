@@ -67,7 +67,7 @@
     'loots' => $prompt->rewards,
     'showLootTables' => true,
     'showRaffles' => true,
-    'statuses' => $statuses,
+    'showStatuses' => true,
 ])
 <hr>
 <h3>Restrict action</h3>
@@ -127,6 +127,7 @@
     'statuses' => $statuses,
     'showLootTables' => true,
     'showRaffles' => true,
+    'showStatuses' => true,
 ])
 
 <div id="limitRowData" class="hide">
@@ -154,7 +155,7 @@
     ]) !!}
 </div>
 
-@include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true, 'statuses' => $statuses])
+@include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true, 'showStatuses' => true])
 
 <script>
     $(document).ready(function() {

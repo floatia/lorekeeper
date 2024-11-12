@@ -9,6 +9,9 @@ $( document ).ready(function() {
     @if($showLootTables)
         var $tableSelect = $('#lootRowData').find('.table-select');
     @endif
+    @if ($showStatuses)
+        var $statusSelect = $('#lootRowData').find('.status-select');
+    @endif
     @if($showRaffles)
         var $raffleSelect = $('#lootRowData').find('.raffle-select');
     @endif
@@ -35,6 +38,9 @@ $( document ).ready(function() {
         @if($showLootTables)
             else if (val == 'LootTable') $clone = $tableSelect.clone();
         @endif
+        @if ($showStatuses)
+            else if (val == 'Status') $clone = $statusSelect.clone();
+        @endif
         @if($showRaffles)
             else if (val == 'Raffle') $clone = $raffleSelect.clone();
         @endif
@@ -54,6 +60,9 @@ $( document ).ready(function() {
             else if (val == 'Status') $clone = $statusSelect.clone();
             @if($showLootTables)
                 else if (val == 'LootTable') $clone = $tableSelect.clone();
+            @endif
+            @if ($showStatuses)
+                else if (val == 'Status') $clone = $statusSelect.clone();
             @endif
             @if($showRaffles)
                 else if (val == 'Raffle') $clone = $raffleSelect.clone();
